@@ -5,9 +5,9 @@ import {  Text, View } from 'react-native';
 export default function App() {
   return (
     <View className=' flex justify-center items-center h-screen' >
-      <Text >Aora!</Text>
+      <Text className='font-pblack ' >Aora!</Text>
       <StatusBar style="auto" />
-      <Link href='/profile' style={{color: "black"}}> Go to profile</Link>
+      <Link href='/home' style={{color: "black"}}> Go to home</Link>
     </View>
   );
 }
