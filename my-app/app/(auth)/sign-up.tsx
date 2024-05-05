@@ -70,7 +70,6 @@ const SignUp = () => {
           handlePress={submit}
           containerStyles='mt-7'
           isLoading = {isSubmitting}
-
           />
           <View className='justify-center pt-5 flex-row gap-2'>
             <Text className='text-lg text-gray-100 font-pregular'>Already have an account?</Text>
