@@ -1,11 +1,18 @@
 import {TouchableOpacity, Text } from 'react-native';
 import React from 'react';
+import { Router } from 'expo-router/build/types';
 
 //implement interface
 
-interface ICustomButton {};
+interface ICustomButtonProps {
+    title: string;
+    containerStyles: string;
+    handlePress: Router;
+    textStyles?: string;
+    isLoadiing?: boolean;
+};
 
-const CustomButton = ({
+const CustomButton: React.FC<ICustomButtonProps> = ({
     title,
     containerStyles,
     handlePress,
