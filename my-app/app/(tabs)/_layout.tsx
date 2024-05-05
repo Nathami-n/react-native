@@ -1,9 +1,16 @@
-import { View, Text } from 'react-native';
+import { View, Text, type ImageSourcePropType } from 'react-native';
 import {Tabs, Redirect} from 'expo-router';
 import { Image } from 'react-native';
 import { icons } from '../../constants';
 
-const TabIcon  = ({
+interface ITabIconProps {
+    icon: ImageSourcePropType;
+    color: string;
+    name: string;
+    focused: boolean
+}
+
+const TabIcon: React.FC<ITabIconProps>  = ({
     icon,
     color,
     name,
@@ -18,6 +25,7 @@ const TabIcon  = ({
             className='w-6 h-6'
             />
             <Text
+            style={{color:color}}
             className={`${focused ? 'font-psemibold': 'font-pregular'} text-xs`}
             >
                 {name}
@@ -31,7 +39,15 @@ const TabsLayout = () => {
     <>
     <Tabs
     screenOptions={{
-        tabBarShowLabel: false
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#ffa001",
+        tabBarInactiveTintColor: "#cdcde0",
+        tabBarStyle: {
+            backgroundColor: "#161622",
+            borderTopWidth: 1,
+            borderTopColor: "#2325333",
+            height: 84
+        }
     }}
     >
         <Tabs.Screen
