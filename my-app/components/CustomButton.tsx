@@ -7,9 +7,9 @@ import { Router } from 'expo-router/build/types';
 interface ICustomButtonProps {
     title: string;
     containerStyles: string;
-    handlePress: Router;
+    handlePress: () => void;
     textStyles?: string;
-    isLoadiing?: boolean;
+    isLoading?: boolean;
 };
 
 const CustomButton: React.FC<ICustomButtonProps> = ({
@@ -17,14 +17,14 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
     containerStyles,
     handlePress,
     textStyles,
-    isLoadiing
+    isLoading
 }) => {
   return (
   <TouchableOpacity
   onPress={handlePress}
   activeOpacity={0.7}
 
-   className={`${containerStyles} bg-secondary rounded-xl min-h-[62px] justify-center items-center ${isLoadiing ? 'opacity-50': ''}`}>
+   className={`${containerStyles} bg-secondary rounded-xl min-h-[62px] justify-center items-center ${isLoading ? 'opacity-50': ''}`}>
     <Text className={`${textStyles}text-primary font-psemibold text-lg`}> {title}</Text>
   </TouchableOpacity>
   )
