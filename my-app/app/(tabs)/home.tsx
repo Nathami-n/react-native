@@ -1,4 +1,4 @@
-import { View, Text, FlatList , Image, RefreshControl, Alert} from 'react-native';
+import { View, Text, FlatList , Image, RefreshControl} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { images } from '../../constants';
@@ -6,45 +6,31 @@ import SearchInput from '../../components/SearchInput';
 import Trending from '../../components/Trending';
 import EmptyState from '../../components/EmptyState';
 import { getAllPosts } from '../../lib/appwrite';
-import { Models } from 'react-native-appwrite';
+import useAppwrite from '../../lib/useAppwrite';
+import VideoCard from '../../components/VideoCard';
+
 
 const Home = () => {
-  const [data, setData] = useState<Models.Document[] | []>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(()=>{
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        
-        const response = await getAllPosts();
-        setData(response);
-      } catch (error) {
-        Alert.alert("error", error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
+  const {data: posts, refetch, } = useAppwrite(getAllPosts);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
     //recall videos
-    
+     await refetch();
     setRefreshing(false);
   }
   return (
     <SafeAreaView className='bg-primary h-full px-3'>
       <FlatList
-      data={[{id:'hello'}]}
+      data={posts}
       keyExtractor={( item)=> item.id }
       renderItem={({item}) => (
-        <Text className='text-white text-3xl'>{item.id}</Text>
+
+        <VideoCard
+        video={item}
+        />
       )}
       ListHeaderComponent={()=> (
         <View className='my-6 py-4 space-y-6'>
