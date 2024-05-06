@@ -13,30 +13,29 @@ const SignIn = () => {
     password: ""
 
   });
-  const [isSubmitting, setIsSubmitting] = useState<boolean>( false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const submit = async () => {
-    if(!form.password || !form.email) {
-      Alert.alert("Error","Please fill in all the fields");
+    if (!form.password || !form.email) {
+      Alert.alert("Error", "Please fill in all the fields");
     };
     setIsSubmitting(true);
     try {
-     await signIn(form.email, form.password);
-
-      //set to global state
-
-      router.replace('/home');
-    } catch(error: Error) {
+      const response = await signIn(form.email, form.password);
+      if (response == null) {
+        router.replace('/home');
+      }
+    } catch (error: Error) {
       Alert.alert("Error", error.message);
     } finally {
       setIsSubmitting(false);
     }
   }
-  
+
   return (
-    <SafeAreaView 
-    
-     className='bg-primary h-full'
-     >
+    <SafeAreaView
+
+      className='bg-primary h-full'
+    >
       <ScrollView>
         <View className='w-full justify-center  min-h-[85vh] px-4 my-8'>
           <Image source={images.logo}
@@ -70,10 +69,10 @@ const SignIn = () => {
             otherStyles="mt-7"
           />
           <CustomButton
-          title='Sign in'
-          handlePress={submit}
-          containerStyles='mt-7'
-          isLoading = {isSubmitting}
+            title='Sign in'
+            handlePress={submit}
+            containerStyles='mt-7'
+            isLoading={isSubmitting}
 
           />
           <View className='justify-center pt-5 flex-row gap-2'>
