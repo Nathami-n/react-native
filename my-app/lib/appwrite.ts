@@ -91,3 +91,19 @@ const databases = new Databases(client);
         console.log(error);
     }
  }
+
+
+ export const getAllPosts = async () => {
+    try {
+        
+        const posts = await databases.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.videoCollectionId,
+        )
+
+        return posts.documents;
+
+    } catch (error: Error) {
+        throw new Error(error);
+    }
+ }
